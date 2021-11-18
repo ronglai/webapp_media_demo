@@ -9,6 +9,16 @@ export function useMediaRecorder(options) {
   const [status, setStatus] = useState("idle");
   const [mediaBlobUrl, setMediaBlobUrl] = useState(null);
   const [error, setError] = useState("NONE");
+  const [option, setOption] = useState(() => {
+    const back = ["video/mp4", "video/webm"];
+    for (let i of back) {
+      if (MediaRecorder.isTypeSupported(i)) {
+        console.log("可以兼容格式", i);
+        return { type: i };
+      }
+    }
+    return null;
+  });
 
   useEffect(() => {
     async function init() {
@@ -34,12 +44,11 @@ export function useMediaRecorder(options) {
     setError("NONE");
     if (mediaStream.current) {
       console.log("start recording");
-      const options = { type: "video/webm" };
-      if (!MediaRecorder.isTypeSupported(options.type)) {
-        alert(`${options.type} 格式不支持,请切换最新的浏览器`);
-        throw new Error("不支持webm格式");
+      if (!option) {
+        alert("此浏览器没有兼容的格式，请换个浏览器尝试");
+        throw Error("此浏览器没有兼容的视频格式，请换一个浏览器");
       }
-      mediaRecorder.current = new MediaRecorder(mediaStream.current, options);
+      mediaRecorder.current = new MediaRecorder(mediaStream.current, option);
       mediaRecorder.current.ondataavailable = onRecordingActive;
       mediaRecorder.current.onstart = () => {
         onStart(mediaStream.current);
@@ -64,8 +73,7 @@ export function useMediaRecorder(options) {
 
   function onRecordingStop() {
     console.log("on record stop");
-    const blobProperty = { type: "video/webm" };
-    const blob = new Blob(mediaChunks.current, blobProperty);
+    const blob = new Blob(mediaChunks.current, option);
     const url = URL.createObjectURL(blob);
     setStatus("stopped");
     setMediaBlobUrl(url);
