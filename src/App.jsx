@@ -53,6 +53,8 @@ function App() {
           ref={input}
           muted="muted"
           className={`recorder ${show ? "hide" : ""}`}
+          playsInline
+          webkit-playsinline="true"
         ></video>
         <video
           ref={output}
