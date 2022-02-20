@@ -64,7 +64,8 @@ function App() {
       <div className="actions">
         <button onClick={() => start()}>开始</button>
         <button onClick={() => play()}>播放</button>
-        <button onClick={() => download()}>下载</button>
+        {/* <button onClick={() => download()}>下载</button> */}
+        <input type="file" name="no" id="no" accept="image/*" capture="user"/>
       </div>
     </div>
   );
