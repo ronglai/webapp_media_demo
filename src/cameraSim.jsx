@@ -93,6 +93,7 @@ function Camera() {
         value={value}
         onClickUpload={takePhoto}
         onChange={(v) => setValue(v)}
+        capture="user"
       ></Uploader>
       {!check && showCapture ? (
         <WebcamCapture setValue={setValue} setShowCapture={setShowCapture} />
