@@ -1,16 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 function Home() {
   return (
     <>
-      {/* <h1>home</h1> */}
-      {/* <nav
+      <nav
         style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem",
+          position: "fixed",
+          bottom: 0,
+          zIndex: 100,
         }}
       >
-        <Link to="/">Invoices</Link> | <Link to="/">Expenses</Link>
-      </nav> */}
+        <Link to="/media">media</Link> | <Link to="/">camera</Link>
+      </nav>
       <Outlet />
     </>
   );

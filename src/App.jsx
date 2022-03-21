@@ -8,9 +8,11 @@ import "react-vant/lib/index.css";
 function App() {
   return (
     <BrowserRouter>
-      <Routes path="/" element={<Home />}>
-        <Route path="media" element={<Media />}></Route>
-        <Route index element={<Camera />}></Route>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="media" element={<Media />}></Route>
+          <Route index element={<Camera />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
