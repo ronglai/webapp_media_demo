@@ -7,7 +7,16 @@ function Media() {
   const { startRecording, stopRecording, mediaBlobUrl, stream } =
     useMediaRecorder({
       constraints: {
-        video: true,
+        video: {
+          width: {
+            ideal: 1280,
+          },
+          height: {
+            ideal: 720,
+          },
+          facingMode: "user",
+          frameRate: { ideal: 30 },
+        },
         audio: true,
       },
       onStart(stream) {
