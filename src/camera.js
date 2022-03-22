@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Toast } from "react-vant";
 
 export function useMediaRecorder(options) {
   const { constraints, onStart = () => {}, onStop = () => {} } = options;
@@ -48,6 +49,8 @@ export function useMediaRecorder(options) {
         alert("此浏览器没有兼容的格式，请换个浏览器尝试");
         throw Error("此浏览器没有兼容的视频格式，请换一个浏览器");
       }
+      const settings = mediaStream.current.getTracks()[1].getSettings();
+      Toast.info(`分辨率height: ${settings.height} width: ${settings.width}`);
       mediaRecorder.current = new MediaRecorder(mediaStream.current, option);
       mediaRecorder.current.ondataavailable = onRecordingActive;
       mediaRecorder.current.onstart = () => {
@@ -72,6 +75,7 @@ export function useMediaRecorder(options) {
   }
 
   function onRecordingStop() {
+    console.log(mediaStream.current.getTracks());
     console.log("on record stop");
     const blob = new Blob(mediaChunks.current, option);
     const url = URL.createObjectURL(blob);

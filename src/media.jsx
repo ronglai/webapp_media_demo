@@ -29,8 +29,6 @@ function Media() {
       },
       onStart(stream) {
         console.log("onstart record,stream = ", stream);
-        Toast.success("开始录制");
-        setStartTime(Date.now());
       },
       onStop(url, blob) {
         console.log("onstop , url = ", url, " blob = ", blob);
