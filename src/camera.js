@@ -111,5 +111,6 @@ export function useMediaRecorder(options) {
     mediaBlobUrl,
     status,
     stream: mediaStream.current,
+    option,
   };
 }

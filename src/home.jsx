@@ -5,7 +5,7 @@ function Home() {
       <nav
         style={{
           position: "fixed",
-          bottom: 0,
+          top: 0,
           zIndex: 100,
         }}
       >
